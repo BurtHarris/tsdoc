@@ -29,6 +29,8 @@
   },
   "homepage": "https://github.com/TypeForce/tsdoc#readme",
   "dependencies": {
-    "@types/node": "^8.0.7"
+    "@types/node": "^8.0.7",
+    "handlebars": "^4.0.10",
+    "typescript": "^2.4.1"
   }
 }
