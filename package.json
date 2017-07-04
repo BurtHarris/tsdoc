@@ -1,7 +1,7 @@
 {
   "name": "tsdoc",
   "version": "0.0.1",
-  "description": "A documentation generator for TypeScript and JavaScript",
+  "description": "A brand-new documentation generator for TypeScript and JavaScript",
   "main": "lib/index.ts",
   "bin": {
     "tsdoc": "lib/bin/tsdoc.js"
