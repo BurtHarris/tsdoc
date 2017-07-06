@@ -7,7 +7,7 @@ const tsProject = ts.createProject('tsconfig.json')
 gulp.task('compile', () => {
   return tsProject.src()
     .pipe(sourcemaps.init())
-    .pipe(tsProject())
+    .pipe(tsProject(ts.reporter.defaultReporter()))
     .pipe(sourcemaps.write())
     .pipe(gulp.dest(tsProject.config.compilerOptions.outDir))
 })
