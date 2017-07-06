@@ -37,5 +37,11 @@
     "lodash": "^4.17.4",
     "reflect-metadata": "^0.1.10",
     "typescript": "^2.4.1"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sourcemaps": "^2.6.0",
+    "gulp-typescript": "^3.1.7",
+    "merge2": "^1.1.0"
   }
 }
