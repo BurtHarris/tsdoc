@@ -15,3 +15,17 @@ export function toArray<T>(val: T | T[] | undefined): T[] {
   return [val]
 }
 
+export function compose<T,R,S>(a: (T) => R, b: (R) => S): (T) => S {
+  return function (arg: T) {
+    return b(a(arg))
+  }
+}
+
+export function omit(obj: any, ...toOmit: string[]) {
+  const newObj = {}
+  for (const key of Object.keys(obj))
+    if (toOmit.indexOf(key) === -1)
+      newObj[key] = obj[key]
+  return newObj
+}
+

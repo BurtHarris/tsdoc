@@ -2,6 +2,12 @@
 import * as ts from "typescript"
 import Documenter from "./documenter"
 
+export interface ThemeDetails {
+  name: string
+  engine: string
+  viewsDir: string
+}
+
 export interface Filter {
   isFiltered(node: ts.Node): boolean
 }
@@ -10,6 +16,7 @@ export interface Filter {
  * Options passed to `Documenter.run()`.
  */
 export interface RunOptions {
+  theme?: string
   filters?: Filter[]
 }
 
@@ -24,6 +31,7 @@ export interface PluginExports {
 }
 
 export interface DocumenterOptions {
+  themes: ThemeDetails[],
   plugins: PluginExports[]
 }
 
@@ -31,7 +39,7 @@ export interface DocumenterOptions {
 export type ViewParams = any
 
 export interface Renderer {
-  render(viewName: string, params: ViewParams): void
+  render(viewName: string, params: ViewParams): string
 }
 
 export interface DocEntry {
