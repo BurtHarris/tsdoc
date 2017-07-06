@@ -33,7 +33,7 @@ const documenter = new Documenter({
 const program = createProgram(argv)
 
 console.log(documenter.run(program, {
-  theme: argv['theme'] || 'default',
+  themeName: argv['theme'] || 'default',
 }))
 
 function renderError(error: ts.Diagnostic): string {
