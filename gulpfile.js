@@ -8,7 +8,7 @@ const ts = require("gulp-typescript")
 
 const projects = fs.readdirSync(path.join(__dirname, 'plugins'))
   .map(filename => path.join(__dirname, 'plugins', filename))
-  .filter(filepath => fs.statSync(filepath).isDirectory())
+  .filter(filepath => fs.statSync(filepath).isDirectory() && fs.existsSync(path.join(filepath, 'tsconfig.json')))
   .concat(['.'])
 
 const tsProjects = projects.map(filepath => ts.createProject(path.join(filepath, 'tsconfig.json')))
