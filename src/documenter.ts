@@ -1,81 +1,29 @@
 
 import * as path from "path"
 import * as ts from "typescript"
-import { Theme, RunOptions, PluginExports, Provider, DocumenterOptions } from "./types"
 import { Container, ContainerModule, interfaces } from "inversify"
 
-import { TYPES } from "./constants"
-import { Renderer } from "./types"
-import { ThemeDetails, getProvided, getTags, injectable, container } from "./annotations"
-import { omit, mapValues } from "./util"
+import { DocumenterOptions, RunOptions } from "./types"
 import { visit, Visitor } from "./transform"
 import DocEntryFactory from "./transform_factory"
+import HandlebarsRenderer from "./renderer"
 
-@injectable()
 export class Documenter {
 
   container = new Container()      
 
-  renderer: Renderer
-
-  themes: Map<string, ThemeDetails>
-  plugins: Map<string, PluginExports>
-
   constructor(public options: DocumenterOptions) {
-    this.container.load(createConfigModule(omit(options, 'plugins')))
-    this.container.parent = container
-    this.container.bind<Documenter>(TYPES.Documenter).toConstantValue(this)
-
-    this.plugins = index(options.plugins, plugin => plugin.default.id)
-    this.themes = index(options.themes, theme => theme.name)
-
-    for (const exports of this.plugins.values()) {
-      for (const exportName of Object.keys(exports)) {
-        if (exportName === 'default')
-          container.bind<Plugin>(TYPES.Plugin).to(exports.default).whenTargetNamed(exports.default.id)
-        else if (typeof exports[exportName] === 'function') {
-          const target = exports[exportName]
-          if (getProvided(target)) {
-            for (const [TYPE, isFactory] of getProvided(target)) {
-              let binding
-              if (isFactory)
-                binding = container.bind<any>(TYPE).to(exports[exportName])
-              else
-                binding = container.bind<any>(TYPE).toFactory(exports[exportName])
-              for (const [key, val] of getTags(target))
-                binding.whenTargetTagged(key, val)
-            }
-          }
-        }
-      }
-    }
-
-  }
-
-  findTheme(themeName: string) {
-    return this.themes.get(themeName)
+    
   }
 
   run(program: ts.Program, options: RunOptions) {
 
-    let { theme } = options
+    let { themeName } = options
 
-    if (theme === undefined)
-      theme = 'default'
+    if (themeName === undefined)
+      themeName = 'default'
 
-    const themeDetails = this.findTheme(options.theme)
-    console.log(themeDetails)
-    if (themeDetails === undefined)
-      throw new Error(`theme ${theme} not found`)
-    
-    // create a container with run configuration
-    const container = new Container()
-    container.parent = this.container
-    console.log(Object.assign(omit(options, 'theme'), themeDetails))
-    container.load(createConfigModule(Object.assign(omit(options, 'theme'), themeDetails)))
-
-    const renderer = container.getTagged<Renderer>(TYPES.Renderer, "engine", themeDetails.engine)
-    const plugins = mapValues(this.plugins, exports => container.getNamed(TYPES.Plugin, exports.default.id))
+    const renderer = new HandlebarsRenderer(path.resolve(__dirname, '..', 'theme', 'views'))
 
     const factory = new DocEntryFactory()
     const visitor = new Visitor(factory)
