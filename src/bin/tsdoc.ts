@@ -1,5 +1,8 @@
 #!/usr/bin/env node
 
+import "source-map-support/register"
+import "neat-errors/register"
+
 import * as ts from "typescript"
 import * as fs from "fs"
 import * as path from "path"
@@ -11,15 +14,27 @@ import { Documenter } from ".."
 
 const argv = minimist(process.argv.slice(2))
 
-console.log(scanPlugins().concat(toArray(argv['plugin'])))
-
-const documenter = new Documenter({ 
-  plugins: scanPlugins().concat(toArray(argv['plugin']).map(pluginDir => path.resolve(pluginDir))).map(require)
+const documenter = new Documenter({
+  themes: scanThemes()
+    .concat(toArray(argv['add-theme']).map(themeDir => path.resolve(themeDir)))
+    .map(themeDir => {
+      const packageJson = require(path.join(themeDir, 'package.json'))
+      return {
+        name: (packageJson.theme && packageJson.theme.name)  || getThemeName(packageJson.name || path.basename(themeDir))
+      , viewsDir: (packageJson.theme && packageJson.theme.viewsDir) || path.join(themeDir, 'views')
+      , engine: (packageJson.theme && packageJson.theme.engine) || 'handlebars'
+      }
+    })
+, plugins: scanPlugins()
+    .concat(toArray(argv['plugin']).map(pluginDir => path.resolve(pluginDir)))
+    .map(require)
 })
 
 const program = createProgram(argv)
 
-console.log(documenter.run(program, {}))
+console.log(documenter.run(program, {
+  theme: argv['theme'] || 'default',
+}))
 
 function renderError(error: ts.Diagnostic): string {
   let output = ''
@@ -74,29 +89,40 @@ function parentDirs(startDir: string) {
     res.push(startDir)
   while (path.dirname(startDir) !== startDir) {
     const parentDir = path.dirname(startDir)
-    res.push(parentDir) 
+    res.push(parentDir)
     startDir = parentDir
   }
   return res
 }
 
-function scanPlugins() {
-
-  let res = new Set<string>()
-
-  function getPluginDirsUpToRoot(dir: string) {
+function findNodeModulesWithKeyword(dirs: string[], keyword: string) {
+  const res = []
+  for (const dir of dirs) {
     for (const parentDir of parentDirs(dir)) {
-      console.log(parentDir)
       if (fs.existsSync(path.join(parentDir, 'node_modules')))
         for (const modulename of fs.readdirSync(path.join(parentDir, 'node_modules'))) {
           const packageJsonPath = path.join(parentDir, 'node_modules', modulename, 'package.json')
           if (fs.existsSync(packageJsonPath)
-              && (require(packageJsonPath).keywords || []).indexOf('tsdoc-plugin') !== -1)
-            res.add(path.join(parentDir, 'node_modules', modulename))
+              && (require(packageJsonPath).keywords || []).indexOf(keyword) !== -1)
+            res.push(path.join(parentDir, 'node_modules', modulename))
         }
     }
   }
+  return res
+}
 
-  return [...res]
+function scanThemes() {
+  return findNodeModulesWithKeyword([__dirname, process.cwd()], 'tsdoc-theme')
+}
+
+function scanPlugins() {
+  return findNodeModulesWithKeyword([__dirname, process.cwd()], 'tsdoc-plugin')
+}
+
+function getThemeName(moduleName: string) {
+  const matches = /tsdoc-([a-z0-9]+)-theme/.exec(moduleName) 
+  if (matches !== null)
+    return matches[1]
+  return moduleName
 }
 
