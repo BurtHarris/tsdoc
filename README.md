@@ -10,6 +10,14 @@
 :point_up: We could use a helping hand. If you think you're up for it, [open an issue](https://github.com/TypeForce/tsdoc/issues/new).
 
 :warning: tsdoc is under heavy development. The current code is still unstable
-and does not generate full documentation just yet. If you want to know, just
-[watch](https://github.com/TypeForce/tsdoc/watchers) the repository.
+and does not generate full documentation just yet. If you want to know when it
+will be finished, you can [watch](https://github.com/TypeForce/tsdoc/watchers)
+the repository.
+
+## Developer Notes
+
+We use [Gulp](http://gulpjs.com/) to build the sources. Here are some usefull commands:
+
+ - `gulp watch` watches the directory for changes and will compile all source files
+ - `gulp compile` will compile all of TSDoc's source files and plugins
 
