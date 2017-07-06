@@ -16,7 +16,7 @@ export interface Filter {
  * Options passed to `Documenter.run()`.
  */
 export interface RunOptions {
-  theme?: string
+  themeName?: string
   filters?: Filter[]
 }
 
@@ -31,8 +31,7 @@ export interface PluginExports {
 }
 
 export interface DocumenterOptions {
-  themes: ThemeDetails[],
-  plugins: PluginExports[]
+
 }
 
 // FIXME: no support for cyclic types
