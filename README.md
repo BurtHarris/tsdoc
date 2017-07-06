@@ -1,5 +1,5 @@
 
-[![Gitter](https://badges.gitter.im/TypeForce/tsdoc.svg)](https://gitter.im/TypeForce/tsdoc?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Gitter](https://badges.gitter.im/TypeForce/tsdoc.svg)](https://gitter.im/TypeForce/tsdoc?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![Build status](https://ci.appveyor.com/api/projects/status/8omlvo00ww98npsb?svg=true)](https://ci.appveyor.com/project/samvv/tsdoc) [![Build Status](https://travis-ci.org/TypeForce/tsdoc.svg?branch=master)](https://travis-ci.org/TypeForce/tsdoc)
 
 > TSDoc is aiming to be an augmentation or replacement of
 > [TypeDoc](https://github.com/TypeStrong/TypeDoc), a documentation generator
@@ -20,4 +20,10 @@ We use [Gulp](http://gulpjs.com/) to build the sources. Here are some usefull co
 
  - `gulp watch` watches the directory for changes and will compile all source files
  - `gulp compile` will compile all of TSDoc's source files and plugins
+
+We also use [InversifyJS](https://github.com/inversify/InversifyJS) as a means
+to decouple **configuration** from **implementation**. In general, string bindings
+are used to denote a configuration entry and bingins using a
+[symbol](https://developer.mozilla.org/nl/docs/Web/JavaScript/Reference/Global_Objects/Symbol)
+are used to denote a specific interface.
 
