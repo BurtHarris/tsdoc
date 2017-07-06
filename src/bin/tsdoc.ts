@@ -5,8 +5,21 @@ import * as fs from "fs"
 import * as path from "path"
 import * as minimist from "minimist"
 
-import { visit, Visitor } from "../transform"
-import DocEntryFactory from "../transform_factory"
+import { Provider } from "../types"
+import { toArray } from "../util"
+import { Documenter } from ".."
+
+const argv = minimist(process.argv.slice(2))
+
+console.log(scanPlugins().concat(toArray(argv['plugin'])))
+
+const documenter = new Documenter({ 
+  plugins: scanPlugins().concat(toArray(argv['plugin']).map(pluginDir => path.resolve(pluginDir))).map(require)
+})
+
+const program = createProgram(argv)
+
+console.log(documenter.run(program, {}))
 
 function renderError(error: ts.Diagnostic): string {
   let output = ''
@@ -55,15 +68,35 @@ function createProgram(argv: minimist.ParsedArgv) {
 
 }
 
-const program = createProgram(minimist(process.argv.slice(2)))
-const factory = new DocEntryFactory()
-const visitor = new Visitor(factory)
-
-for (const sourceFile of program.getSourceFiles()) {
-  visitor.visit(sourceFile)
+function parentDirs(startDir: string) {
+  let res = []
+  if (fs.statSync(startDir).isDirectory())
+    res.push(startDir)
+  while (path.dirname(startDir) !== startDir) {
+    const parentDir = path.dirname(startDir)
+    res.push(parentDir) 
+    startDir = parentDir
+  }
+  return res
 }
 
-for (const decl of factory.classes) {
-  console.log(decl.kind)
+function scanPlugins() {
+
+  let res = new Set<string>()
+
+  function getPluginDirsUpToRoot(dir: string) {
+    for (const parentDir of parentDirs(dir)) {
+      console.log(parentDir)
+      if (fs.existsSync(path.join(parentDir, 'node_modules')))
+        for (const modulename of fs.readdirSync(path.join(parentDir, 'node_modules'))) {
+          const packageJsonPath = path.join(parentDir, 'node_modules', modulename, 'package.json')
+          if (fs.existsSync(packageJsonPath)
+              && (require(packageJsonPath).keywords || []).indexOf('tsdoc-plugin') !== -1)
+            res.add(path.join(parentDir, 'node_modules', modulename))
+        }
+    }
+  }
+
+  return [...res]
 }
 

@@ -36,349 +36,349 @@ function assignAndMapElements(arr, mapper, obj) {
 
 export interface Factory {
 
-  Node(node: any)
+  Node(node: any): any
 
-  Token(node: any)
+  Token(node: any): any
 
-  Identifier(node: any)
+  Identifier(node: any): any
 
-  QualifiedName(node: any)
+  QualifiedName(node: any): any
 
-  ComputedPropertyName(node: any)
+  ComputedPropertyName(node: any): any
 
-  Decorator(node: any)
+  Decorator(node: any): any
 
-  TypeParameterDeclaration(node: any)
+  TypeParameterDeclaration(node: any): any
 
-  CallSignatureDeclaration(node: any)
+  CallSignatureDeclaration(node: any): any
 
-  ConstructSignatureDeclaration(node: any)
+  ConstructSignatureDeclaration(node: any): any
 
-  VariableDeclaration(node: any)
+  VariableDeclaration(node: any): any
 
-  VariableDeclarationList(node: any)
+  VariableDeclarationList(node: any): any
 
-  ParameterDeclaration(node: any)
+  ParameterDeclaration(node: any): any
 
-  BindingElement(node: any)
+  BindingElement(node: any): any
 
-  PropertySignature(node: any)
+  PropertySignature(node: any): any
 
-  PropertyDeclaration(node: any)
+  PropertyDeclaration(node: any): any
 
-  PropertyAssignment(node: any)
+  PropertyAssignment(node: any): any
 
-  ShorthandPropertyAssignment(node: any)
+  ShorthandPropertyAssignment(node: any): any
 
-  SpreadAssignment(node: any)
+  SpreadAssignment(node: any): any
 
-  ObjectBindingPattern(node: any)
+  ObjectBindingPattern(node: any): any
 
-  ArrayBindingPattern(node: any)
+  ArrayBindingPattern(node: any): any
 
-  FunctionDeclaration(node: any)
+  FunctionDeclaration(node: any): any
 
-  MethodSignature(node: any)
+  MethodSignature(node: any): any
 
-  MethodDeclaration(node: any)
+  MethodDeclaration(node: any): any
 
-  ConstructorDeclaration(node: any)
+  ConstructorDeclaration(node: any): any
 
-  SemicolonClassElement(node: any)
+  SemicolonClassElement(node: any): any
 
-  GetAccessorDeclaration(node: any)
+  GetAccessorDeclaration(node: any): any
 
-  SetAccessorDeclaration(node: any)
+  SetAccessorDeclaration(node: any): any
 
-  IndexSignatureDeclaration(node: any)
+  IndexSignatureDeclaration(node: any): any
 
-  KeywordTypeNode(node: any)
+  KeywordTypeNode(node: any): any
 
-  ThisTypeNode(node: any)
+  ThisTypeNode(node: any): any
 
-  FunctionTypeNode(node: any)
+  FunctionTypeNode(node: any): any
 
-  ConstructorTypeNode(node: any)
+  ConstructorTypeNode(node: any): any
 
-  TypeReferenceNode(node: any)
+  TypeReferenceNode(node: any): any
 
-  TypePredicateNode(node: any)
+  TypePredicateNode(node: any): any
 
-  TypeQueryNode(node: any)
+  TypeQueryNode(node: any): any
 
-  TypeLiteralNode(node: any)
+  TypeLiteralNode(node: any): any
 
-  ArrayTypeNode(node: any)
+  ArrayTypeNode(node: any): any
 
-  TupleTypeNode(node: any)
+  TupleTypeNode(node: any): any
 
-  UnionTypeNode(node: any)
+  UnionTypeNode(node: any): any
 
-  IntersectionTypeNode(node: any)
+  IntersectionTypeNode(node: any): any
 
-  ParenthesizedTypeNode(node: any)
+  ParenthesizedTypeNode(node: any): any
 
-  TypeOperatorNode(node: any)
+  TypeOperatorNode(node: any): any
 
-  IndexedAccessTypeNode(node: any)
+  IndexedAccessTypeNode(node: any): any
 
-  MappedTypeNode(node: any)
+  MappedTypeNode(node: any): any
 
-  LiteralTypeNode(node: any)
+  LiteralTypeNode(node: any): any
 
-  StringLiteral(node: any)
+  StringLiteral(node: any): any
 
-  OmittedExpression(node: any)
+  OmittedExpression(node: any): any
 
-  PartiallyEmittedExpression(node: any)
+  PartiallyEmittedExpression(node: any): any
 
-  PrefixUnaryExpression(node: any)
+  PrefixUnaryExpression(node: any): any
 
-  PostfixUnaryExpression(node: any)
+  PostfixUnaryExpression(node: any): any
 
-  NullLiteral(node: any)
+  NullLiteral(node: any): any
 
-  BooleanLiteral(node: any)
+  BooleanLiteral(node: any): any
 
-  ThisExpression(node: any)
+  ThisExpression(node: any): any
 
-  SuperExpression(node: any)
+  SuperExpression(node: any): any
 
-  ImportExpression(node: any)
+  ImportExpression(node: any): any
 
-  DeleteExpression(node: any)
+  DeleteExpression(node: any): any
 
-  TypeOfExpression(node: any)
+  TypeOfExpression(node: any): any
 
-  VoidExpression(node: any)
+  VoidExpression(node: any): any
 
-  AwaitExpression(node: any)
+  AwaitExpression(node: any): any
 
-  YieldExpression(node: any)
+  YieldExpression(node: any): any
 
-  BinaryExpression(node: any)
+  BinaryExpression(node: any): any
 
-  ConditionalExpression(node: any)
+  ConditionalExpression(node: any): any
 
-  FunctionExpression(node: any)
+  FunctionExpression(node: any): any
 
-  ArrowFunction(node: any)
+  ArrowFunction(node: any): any
 
-  RegularExpressionLiteral(node: any)
+  RegularExpressionLiteral(node: any): any
 
-  NoSubstitutionTemplateLiteral(node: any)
+  NoSubstitutionTemplateLiteral(node: any): any
 
-  NumericLiteral(node: any)
+  NumericLiteral(node: any): any
 
-  TemplateHead(node: any)
+  TemplateHead(node: any): any
 
-  TemplateMiddle(node: any)
+  TemplateMiddle(node: any): any
 
-  TemplateTail(node: any)
+  TemplateTail(node: any): any
 
-  TemplateExpression(node: any)
+  TemplateExpression(node: any): any
 
-  TemplateSpan(node: any)
+  TemplateSpan(node: any): any
 
-  ParenthesizedExpression(node: any)
+  ParenthesizedExpression(node: any): any
 
-  ArrayLiteralExpression(node: any)
+  ArrayLiteralExpression(node: any): any
 
-  SpreadElement(node: any)
+  SpreadElement(node: any): any
 
-  ObjectLiteralExpression(node: any)
+  ObjectLiteralExpression(node: any): any
 
-  PropertyAccessExpression(node: any)
+  PropertyAccessExpression(node: any): any
 
-  ElementAccessExpression(node: any)
+  ElementAccessExpression(node: any): any
 
-  CallExpression(node: any)
+  CallExpression(node: any): any
 
-  ExpressionWithTypeArguments(node: any)
+  ExpressionWithTypeArguments(node: any): any
 
-  NewExpression(node: any)
+  NewExpression(node: any): any
 
-  TaggedTemplateExpression(node: any)
+  TaggedTemplateExpression(node: any): any
 
-  AsExpression(node: any)
+  AsExpression(node: any): any
 
-  TypeAssertion(node: any)
+  TypeAssertion(node: any): any
 
-  NonNullExpression(node: any)
+  NonNullExpression(node: any): any
 
-  MetaProperty(node: any)
+  MetaProperty(node: any): any
 
-  JsxElement(node: any)
+  JsxElement(node: any): any
 
-  JsxOpeningElement(node: any)
+  JsxOpeningElement(node: any): any
 
-  JsxSelfClosingElement(node: any)
+  JsxSelfClosingElement(node: any): any
 
-  JsxAttribute(node: any)
+  JsxAttribute(node: any): any
 
-  JsxSpreadAttribute(node: any)
+  JsxSpreadAttribute(node: any): any
 
-  JsxClosingElement(node: any)
+  JsxClosingElement(node: any): any
 
-  JsxExpression(node: any)
+  JsxExpression(node: any): any
 
-  JsxText(node: any)
+  JsxText(node: any): any
 
-  NotEmittedStatement(node: any)
+  NotEmittedStatement(node: any): any
 
-  CommaListExpression(node: any)
+  CommaListExpression(node: any): any
 
-  EmptyStatement(node: any)
+  EmptyStatement(node: any): any
 
-  DebuggerStatement(node: any)
+  DebuggerStatement(node: any): any
 
-  MissingDeclaration(node: any)
+  MissingDeclaration(node: any): any
 
-  Block(node: any)
+  Block(node: any): any
 
-  VariableStatement(node: any)
+  VariableStatement(node: any): any
 
-  ExpressionStatement(node: any)
+  ExpressionStatement(node: any): any
 
-  IfStatement(node: any)
+  IfStatement(node: any): any
 
-  DoStatement(node: any)
+  DoStatement(node: any): any
 
-  WhileStatement(node: any)
+  WhileStatement(node: any): any
 
-  ForStatement(node: any)
+  ForStatement(node: any): any
 
-  ForInStatement(node: any)
+  ForInStatement(node: any): any
 
-  ForOfStatement(node: any)
+  ForOfStatement(node: any): any
 
-  BreakStatement(node: any)
+  BreakStatement(node: any): any
 
-  ContinueStatement(node: any)
+  ContinueStatement(node: any): any
 
-  ReturnStatement(node: any)
+  ReturnStatement(node: any): any
 
-  WithStatement(node: any)
+  WithStatement(node: any): any
 
-  SwitchStatement(node: any)
+  SwitchStatement(node: any): any
 
-  CaseBlock(node: any)
+  CaseBlock(node: any): any
 
-  CaseClause(node: any)
+  CaseClause(node: any): any
 
-  DefaultClause(node: any)
+  DefaultClause(node: any): any
 
-  LabeledStatement(node: any)
+  LabeledStatement(node: any): any
 
-  ThrowStatement(node: any)
+  ThrowStatement(node: any): any
 
-  TryStatement(node: any)
+  TryStatement(node: any): any
 
-  CatchClause(node: any)
+  CatchClause(node: any): any
 
-  ClassDeclaration(node: any)
+  ClassDeclaration(node: any): any
 
-  ClassExpression(node: any)
+  ClassExpression(node: any): any
 
-  InterfaceDeclaration(node: any)
+  InterfaceDeclaration(node: any): any
 
-  HeritageClause(node: any)
+  HeritageClause(node: any): any
 
-  TypeAliasDeclaration(node: any)
+  TypeAliasDeclaration(node: any): any
 
-  EnumMember(node: any)
+  EnumMember(node: any): any
 
-  EnumDeclaration(node: any)
+  EnumDeclaration(node: any): any
 
-  ModuleDeclaration(node: any)
+  ModuleDeclaration(node: any): any
 
-  ModuleBlock(node: any)
+  ModuleBlock(node: any): any
 
-  ImportEqualsDeclaration(node: any)
+  ImportEqualsDeclaration(node: any): any
 
-  ExternalModuleReference(node: any)
+  ExternalModuleReference(node: any): any
 
-  ImportDeclaration(node: any)
+  ImportDeclaration(node: any): any
 
-  ImportClause(node: any)
+  ImportClause(node: any): any
 
-  NamespaceImport(node: any)
+  NamespaceImport(node: any): any
 
-  NamespaceExportDeclaration(node: any)
+  NamespaceExportDeclaration(node: any): any
 
-  ExportDeclaration(node: any)
+  ExportDeclaration(node: any): any
 
-  NamedImports(node: any)
+  NamedImports(node: any): any
 
-  NamedExports(node: any)
+  NamedExports(node: any): any
 
-  ImportSpecifier(node: any)
+  ImportSpecifier(node: any): any
 
-  ExportSpecifier(node: any)
+  ExportSpecifier(node: any): any
 
-  ExportAssignment(node: any)
+  ExportAssignment(node: any): any
 
-  CommentRange(node: any)
+  CommentRange(node: any): any
 
-  JSDocTypeExpression(node: any)
+  JSDocTypeExpression(node: any): any
 
-  JSDocAllType(node: any)
+  JSDocAllType(node: any): any
 
-  JSDocUnknownType(node: any)
+  JSDocUnknownType(node: any): any
 
-  JSDocArrayType(node: any)
+  JSDocArrayType(node: any): any
 
-  JSDocUnionType(node: any)
+  JSDocUnionType(node: any): any
 
-  JSDocTupleType(node: any)
+  JSDocTupleType(node: any): any
 
-  JSDocNonNullableType(node: any)
+  JSDocNonNullableType(node: any): any
 
-  JSDocNullableType(node: any)
+  JSDocNullableType(node: any): any
 
-  JSDocRecordType(node: any)
+  JSDocRecordType(node: any): any
 
-  JSDocTypeReference(node: any)
+  JSDocTypeReference(node: any): any
 
-  JSDocOptionalType(node: any)
+  JSDocOptionalType(node: any): any
 
-  JSDocFunctionType(node: any)
+  JSDocFunctionType(node: any): any
 
-  JSDocVariadicType(node: any)
+  JSDocVariadicType(node: any): any
 
-  JSDocConstructorType(node: any)
+  JSDocConstructorType(node: any): any
 
-  JSDocThisType(node: any)
+  JSDocThisType(node: any): any
 
-  JSDocLiteralType(node: any)
+  JSDocLiteralType(node: any): any
 
-  JSDocRecordMember(node: any)
+  JSDocRecordMember(node: any): any
 
-  JSDoc(node: any)
+  JSDoc(node: any): any
 
-  JSDocUnknownTag(node: any)
+  JSDocUnknownTag(node: any): any
 
-  JSDocAugmentsTag(node: any)
+  JSDocAugmentsTag(node: any): any
 
-  JSDocClassTag(node: any)
+  JSDocClassTag(node: any): any
 
-  JSDocTemplateTag(node: any)
+  JSDocTemplateTag(node: any): any
 
-  JSDocReturnTag(node: any)
+  JSDocReturnTag(node: any): any
 
-  JSDocTypeTag(node: any)
+  JSDocTypeTag(node: any): any
 
-  JSDocTypedefTag(node: any)
+  JSDocTypedefTag(node: any): any
 
-  JSDocPropertyTag(node: any)
+  JSDocPropertyTag(node: any): any
 
-  JSDocTypeLiteral(node: any)
+  JSDocTypeLiteral(node: any): any
 
-  JSDocParameterTag(node: any)
+  JSDocParameterTag(node: any): any
 
-  SourceFile(node: any)
+  SourceFile(node: any): any
 
-  Bundle(node: any)
+  Bundle(node: any): any
 
 
 }

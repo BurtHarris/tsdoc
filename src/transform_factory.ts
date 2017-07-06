@@ -1,19 +1,20 @@
 
 import * as ts from "typescript"
 import { Factory } from "./transform"
+import { DocEntry } from "./types"
 
 export class DocEntryFactory {
 
   count = 0
 
-  interfaces: ts.InterfaceDeclaration[] = []
-  classes: ts.ClassDeclaration[] = []
+  interfaces: DocEntry[] = []
+  classes: DocEntry[] = []
 
   protected generateId() {
     return ++this.count
   }
 
-  Node(node: any) {
+  Node(node: any): DocEntry {
     node.kind = ts.SyntaxKind[node.kind]
     node.id = this.generateId()
     return node
@@ -24,7 +25,7 @@ export class DocEntryFactory {
   }
 
   Identifier(node: any) {
-    return this.Node(node)
+    return node.text
   }
 
   QualifiedName(node: any) {

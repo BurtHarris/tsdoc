@@ -2,11 +2,6 @@
 import * as ts from "typescript"
 import Documenter from "./documenter"
 
-export const TYPES = {
-  Documenter: Symbol('tsdoc documenter'),
-  Plugin: Symbol('tsdoc plugin'),
-}
-
 export interface Filter {
   isFiltered(node: ts.Node): boolean
 }
@@ -30,5 +25,20 @@ export interface PluginExports {
 
 export interface DocumenterOptions {
   plugins: PluginExports[]
+}
+
+// FIXME: no support for cyclic types
+export type ViewParams = any
+
+export interface Renderer {
+  render(viewName: string, params: ViewParams): void
+}
+
+export interface DocEntry {
+  parent?: DocEntry
+  kind: string
+  pos: number
+  end: number
+  [name: string]: any
 }
 
