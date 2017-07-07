@@ -32,6 +32,8 @@
   },
   "homepage": "https://github.com/TypeForce/tsdoc#readme",
   "dependencies": {
+    "@types/vinyl": "^2.0.0",
+    "@types/vinyl-fs": "^2.4.5",
     "handlebars": "^4.0.10",
     "inversify": "^4.2.0",
     "inversify-inject-decorators": "^3.0.1",
@@ -39,7 +41,9 @@
     "neat-errors": "^1.0.8",
     "reflect-metadata": "^0.1.10",
     "source-map-support": "^0.4.15",
-    "typescript": "^2.4.1"
+    "typescript": "^2.4.1",
+    "vinyl": "^2.1.0",
+    "vinyl-fs": "^2.4.4"
   },
   "devDependencies": {
     "@types/node": "^8.0.7",

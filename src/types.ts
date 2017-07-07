@@ -20,18 +20,17 @@ export interface RunOptions {
   filters?: Filter[]
 }
 
+export interface ProgramOptions {
+  compilerArgs?: string[]
+  fileNames: string[]
+}
+
 export interface Provider<T> {
   new (...args): T
   id: string
 }
 
-export interface PluginExports {
-  [name: string]: any
-  default: Provider<Plugin>
-}
-
 export interface DocumenterOptions {
-
 }
 
 // FIXME: no support for cyclic types

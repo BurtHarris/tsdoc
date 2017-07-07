@@ -7,22 +7,41 @@ import * as ts from "typescript"
 import * as fs from "fs"
 import * as path from "path"
 import * as minimist from "minimist"
+import * as vfs from "vinyl-fs"
 
-import { Provider } from "../types"
+import createProgram from "../createProgram"
 import { toArray } from "../util"
 import { Documenter } from ".."
 
 const argv = minimist(process.argv.slice(2))
 
-const documenter = new Documenter({ 
+const documenter = new Documenter({ })
 
-})
+const options = getCompilerOptionsFromArgv(argv['--'] || [])
 
-const program = createProgram(argv)
+let { program, errors } =  argv._.length > 0
+  ? createProgram(argv._, getCompilerOptionsFromArgv(argv)) 
+  : createProgram(argv['project'] || 'tsconfig.json')
 
-console.log(documenter.run(program, {
-  themeName: argv['theme'] || 'default',
-}))
+if (errors) {
+  for (const error of errors) {
+    renderError(error)
+  }
+  process.exit(1);
+}
+
+const destDir = argv['out'] || 'docs'
+
+if (fs.existsSync(destDir)) {
+  console.error(`Directroy ${destDir} already exists. Updating is not yet supported. For now, you have to delete it manually.`)
+  process.exit(1)
+}
+
+documenter.analyse(program)
+
+const generated = vfs.src(program.getRootFileNames())
+  .pipe(documenter.run())
+  .pipe(vfs.dest(destDir))
 
 function renderError(error: ts.Diagnostic): string {
   let output = ''
@@ -34,83 +53,14 @@ function renderError(error: ts.Diagnostic): string {
   return output
 }
 
-function createProgram(argv: minimist.ParsedArgv) {
-
-  if (argv._.length > 0) {
-
-    const { options, errors } = ts.parseCommandLine(argv['--'] || [])
-    if (!options) {
-      for (const err of errors) {
-        console.error(renderError(err));
-      }
-      process.exit(1);
+function getCompilerOptionsFromArgv(argv: string[]) { 
+  const { options, errors } = ts.parseCommandLine(argv)
+  if (!options) {
+    for (const err of errors) {
+      console.error(renderError(err));
     }
-
-    return ts.createProgram(argv._, options);
-
-  } else {
-
-    const basePath: string = path.resolve(argv['project'])
-    const { config, error } = ts.parseConfigFileTextToJson("tsconfig.json", fs.readFileSync(path.resolve(basePath, "tsconfig.json")).toString())
-
-    if (error) {
-      console.error(renderError(error));
-      process.exit(1);
-    }
-
-    const { errors, fileNames, options } = ts.parseJsonConfigFileContent(config, ts.sys, basePath);
-    if (!options) {
-      for (const err of errors) {
-        console.error(renderError(err));
-      }
-      process.exit(1);
-    }
-
-    return ts.createProgram(fileNames, options);
+    process.exit(1);
   }
-
-}
-
-function parentDirs(startDir: string) {
-  let res = []
-  if (fs.statSync(startDir).isDirectory())
-    res.push(startDir)
-  while (path.dirname(startDir) !== startDir) {
-    const parentDir = path.dirname(startDir)
-    res.push(parentDir)
-    startDir = parentDir
-  }
-  return res
-}
-
-function findNodeModulesWithKeyword(dirs: string[], keyword: string) {
-  const res = []
-  for (const dir of dirs) {
-    for (const parentDir of parentDirs(dir)) {
-      if (fs.existsSync(path.join(parentDir, 'node_modules')))
-        for (const modulename of fs.readdirSync(path.join(parentDir, 'node_modules'))) {
-          const packageJsonPath = path.join(parentDir, 'node_modules', modulename, 'package.json')
-          if (fs.existsSync(packageJsonPath)
-              && (require(packageJsonPath).keywords || []).indexOf(keyword) !== -1)
-            res.push(path.join(parentDir, 'node_modules', modulename))
-        }
-    }
-  }
-  return res
-}
-
-function scanThemes() {
-  return findNodeModulesWithKeyword([__dirname, process.cwd()], 'tsdoc-theme')
-}
-
-function scanPlugins() {
-  return findNodeModulesWithKeyword([__dirname, process.cwd()], 'tsdoc-plugin')
-}
-
-function getThemeName(moduleName: string) {
-  const matches = /tsdoc-([a-z0-9]+)-theme/.exec(moduleName) 
-  if (matches !== null)
-    return matches[1]
-  return moduleName
+  return options
 }
 
