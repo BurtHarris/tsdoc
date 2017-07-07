@@ -14,20 +14,8 @@ import { Documenter } from ".."
 
 const argv = minimist(process.argv.slice(2))
 
-const documenter = new Documenter({
-  themes: scanThemes()
-    .concat(toArray(argv['add-theme']).map(themeDir => path.resolve(themeDir)))
-    .map(themeDir => {
-      const packageJson = require(path.join(themeDir, 'package.json'))
-      return {
-        name: (packageJson.theme && packageJson.theme.name)  || getThemeName(packageJson.name || path.basename(themeDir))
-      , viewsDir: (packageJson.theme && packageJson.theme.viewsDir) || path.join(themeDir, 'views')
-      , engine: (packageJson.theme && packageJson.theme.engine) || 'handlebars'
-      }
-    })
-, plugins: scanPlugins()
-    .concat(toArray(argv['plugin']).map(pluginDir => path.resolve(pluginDir)))
-    .map(require)
+const documenter = new Documenter({ 
+
 })
 
 const program = createProgram(argv)
