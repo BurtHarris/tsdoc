@@ -7,7 +7,7 @@ export function getSourceFile(node: DocEntry) {
   while (node) {
     if (node.kind === 'SourceFile')
       return node
-    return node
+    node = node.parent
   }
 }
 
