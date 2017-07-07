@@ -9,7 +9,7 @@
   "scripts": {
     "prepare": "gulp",
     "gen-transform": "tsvgen node_modules/typescript/lib/typescript.d.ts --var-name node --match ts.Node.kind > src/transform.ts",
-    "test": "standard && lib/bin/tsdoc.js test/snippets/mixed.ts",
+    "test": "standard && node lib/bin/tsdoc.js test/snippets/mixed.ts",
     "standard-fix": "standard --fix"
   },
   "repository": {
