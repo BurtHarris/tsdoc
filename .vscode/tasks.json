@@ -9,11 +9,11 @@
     ],
     "tasks": [
         {
-            "taskName": "watch",
-            "args": ["watch"],
+            "taskName": "default",
+            "args": [],
             "isBuildCommand": true,
             "problemMatcher": [
-                "$tsc-watch",
+                "$tsc",
                 "$jshint"
             ]
         }
