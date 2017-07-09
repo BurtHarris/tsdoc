@@ -7,6 +7,15 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "Gulp tslint",
+            "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
+            "args": [
+                "tslint"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "Launch Program",
             "preLaunchTask": "default",
             "program": "${workspaceRoot}\\lib\\bin\\tsdoc.js",

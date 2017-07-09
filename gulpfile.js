@@ -1,19 +1,32 @@
-const gulp = require('gulp')
-const sourcemaps = require('gulp-sourcemaps')
-const ts = require('gulp-typescript')
+  const gulp = require('gulp')
+  const childProcess = require('child_process')
+  const sourcemaps = require('gulp-sourcemaps')
+  const ts = require('gulp-typescript')
+  const tsProject = ts.createProject('tsconfig.json')
+  const typescriptTasks = ['tslint', 'compile']
 
-const tsProject = ts.createProject('tsconfig.json')
+  gulp.task('standard-gulpfile', () => {
+    return childProcess.exec('standard gulpfile.js --fix')
+  })
 
-gulp.task('compile', () => {
-  return tsProject.src()
-    .pipe(sourcemaps.init())
-    .pipe(tsProject(ts.reporter.defaultReporter()))
-    .pipe(sourcemaps.write())
-    .pipe(gulp.dest(tsProject.config.compilerOptions.outDir))
-})
+  gulp.task('tslint', ['compile'], () => {
+    return childProcess.exec('tslint -p . --type-check gulpfile.js', {stdio: 'inherit'})
+  })
 
-gulp.task('watch', ['compile'], () => {
-  gulp.watch(['src/**/*.ts'], ['compile'])
-})
+  gulp.task('tslint-fix', ['compile'], () => {
+    return childProcess.exec('tslint -p . --type-check --fix', {stdio: 'inherit'})
+  })
 
-gulp.task('default', ['compile'])
+  gulp.task('compile', ['standard-gulpfile'], () => {
+    return tsProject.src()
+      .pipe(sourcemaps.init())
+      .pipe(tsProject(ts.reporter.defaultReporter()))
+      .pipe(sourcemaps.write())
+      .pipe(gulp.dest(tsProject.config.compilerOptions.outDir))
+  })
+
+  gulp.task('watch', typescriptTasks, () => {
+    gulp.watch(['src/**/*.ts'], typescriptTasks)
+  })
+
+  gulp.task('default', typescriptTasks)

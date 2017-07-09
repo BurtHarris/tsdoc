@@ -1,5 +1,7 @@
 
 [![Gitter](https://badges.gitter.im/TypeForce/tsdoc.svg)](https://gitter.im/TypeForce/tsdoc?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![Build status](https://ci.appveyor.com/api/projects/status/8omlvo00ww98npsb?svg=true)](https://ci.appveyor.com/project/samvv/tsdoc) [![Build Status](https://travis-ci.org/TypeForce/tsdoc.svg?branch=master)](https://travis-ci.org/TypeForce/tsdoc)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+
 
 > TSDoc is aiming to be an augmentation or replacement of
 > [TypeDoc](https://github.com/TypeStrong/TypeDoc), a documentation generator

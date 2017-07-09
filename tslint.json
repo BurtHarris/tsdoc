@@ -1,0 +1,11 @@
+{
+    "extends": [
+        "tslint-config-standard"
+    ],
+    "rules": {
+        // producing conflicts...
+        "ter-indent": false,
+        "no-unused-variable": false
+
+    }
+}

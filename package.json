@@ -8,9 +8,10 @@
   },
   "scripts": {
     "prepare": "gulp",
+    "lint": "tslint --project tsconfig.json --type-check",
     "gen-transform": "tsvgen node_modules/typescript/lib/typescript.d.ts --var-name node --match ts.Node.kind > src/transform.ts",
-    "test": "standard && node lib/bin/tsdoc.js test/snippets/mixed.ts",
-    "standard-fix": "standard --fix"
+    "test": "npm run lint && node lib/bin/tsdoc.js test/snippets/mixed.ts",
+    "lint-fix": "tslint --project tsconfig.json --type-check --fix"
   },
   "repository": {
     "type": "git",
@@ -41,7 +42,6 @@
     "neat-errors": "^1.0.8",
     "reflect-metadata": "^0.1.10",
     "source-map-support": "^0.4.15",
-    "typescript": "^2.4.1",
     "vinyl": "^2.1.0",
     "vinyl-fs": "^2.4.4"
   },
@@ -49,8 +49,13 @@
     "@types/node": "^8.0.7",
     "gulp": "^3.9.1",
     "gulp-sourcemaps": "^2.6.0",
+    "gulp-tslint": "^8.1.1",
     "gulp-typescript": "^3.1.7",
     "merge2": "^1.1.0",
-    "standard": "^10.0.2"
+    "standard": "^10.0.2",
+    "tslint": "^5.5.0",
+    "tslint-config-standard": "^6.0.1",
+    "tslint-language-service": "^0.9.6",
+    "typescript": "^2.4.1"
   }
 }

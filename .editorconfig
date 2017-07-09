@@ -1,0 +1,11 @@
+root = true
+
+[*.{ts,js,json,}]
+indent_style = space
+tab_width = 2
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+[.{gitignore,gitattributes,editorconfig}]
+insert_final_newline = true
+trim_trailing_whitespace = true

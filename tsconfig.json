@@ -3,7 +3,16 @@
     "outDir": "./lib",
     "target": "es6",
     "module": "commonjs",
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "strictNullChecks": true,
+    "plugins": [
+      {
+        "name": "tslint-language-service",
+        "configFile": "./tslint.json"
+      }
+    ]
   },
-  "include": ["src/**/*.ts"]
+  "include": [
+    "src/**/*.ts"
+  ]
 }
