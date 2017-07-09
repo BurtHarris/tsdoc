@@ -1,22 +1,23 @@
+/**
+ * @module
+ * @description
+ * This module is in TypeScript.
+ */
 // tslint:disable:no-empty
 
 type Point = [number, number]
 
 /**
  * Documentation for C
+ * @class
  */
 export class C {
-  /**
-   * constructor documentation
-   * @param a my parameter documentation
-   * @param b another parameter documentation
-   */
-  constructor (a: string, b: C) { }
+  constructor (public a: string, public b: C) {
 
+   }
   foo (p: Point) {
-
+    console.log('foo')
   }
-
 }
 
 /**

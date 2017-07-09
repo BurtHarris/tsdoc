@@ -7,6 +7,13 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "jsdoc -r test/**/*.js",
+            "program": "${workspaceRoot}/node_modules/jsdoc/jsdoc",
+            "args": [ "-r", "test/**/*.js" ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "Gulp tslint",
             "program": "${workspaceRoot}/node_modules/gulp/bin/gulp.js",
             "args": [
@@ -18,7 +25,7 @@
             "request": "launch",
             "name": "Launch Program",
             "preLaunchTask": "default",
-            "program": "${workspaceRoot}\\lib\\bin\\tsdoc.js",
+            "program": "${workspaceRoot}/lib/bin/tsdoc.js",
             "args": ["./src/**/*.ts"],
             "outFiles": [
                 "${workspaceRoot}/lib/**/*.js"
