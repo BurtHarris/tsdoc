@@ -47,7 +47,7 @@
   gulp.task('testdoc', ['rimraf-out'], cb => {
     const config = require('./test/jsdoc.json')
 
-    gulp.src(testDocs, {read: false})
+    return gulp.src(testDocs, {read: false})
         .pipe(jsdoc(config, cb))
   })
 
