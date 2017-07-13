@@ -74,5 +74,3 @@ export class Dot extends Point {
 
     }
 }
-
-export {Point, Dot}
